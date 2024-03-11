@@ -1,0 +1,25 @@
+services:
+  app:
+    image: ambientum/php:8.1-nginx
+    container_name: ignition-app
+    volumes:
+      - .:/var/www/app
+    ports:
+      - 80:8080
+      - 443:8083
+    networks:
+      - ignition
+
+  db:
+    image: mysql
+    container_name: ignition-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: ignitiondb
+    networks:
+      - ignition
+
+networks:
+  ignition:
